@@ -35,7 +35,7 @@ if os.path.isfile(args.binfile):
 	header = [MARKER,hi,lo,csum]
 	w.write(bytearray(header))
 	
-	while 1:
+	while True:
 		b = r.read(255)
 		size = len(b)
 		sum = size
