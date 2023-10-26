@@ -45,16 +45,15 @@ if os.path.isfile(args.cmtfile):
 			basic_name = "".join(name)
 			print("BASIC ",basic_name)
 			while True :
-				if (file[fp] == 0x00 and file[fp+1] == 0x00 and file[fp+2] == 0x00) :
+				if (file[fp:fp+13]==bytearray([0]*13)) :
 					break
 				else :
 					fp = fp + 1
-			fp = fp + 12
-			end_fp = fp - 1
+			fp = fp + 13
 #			print("end fp :",end_fp)
 #			print("BASIC  END")
-			w = open(str(serial)+"_bas_"+args.cmtfile,'wb')
-			w.write(file[start_fp:end_fp])
+			w = open(args.cmtfile+"_"+str(serial)+".cmt",'wb')
+			w.write(file[start_fp:fp])
 			w.close()
 			serial = serial + 1
 
@@ -73,7 +72,7 @@ if os.path.isfile(args.cmtfile):
 						end_fp = fp-1
 #						print("end fp :",end_fp)
 #						print("BINARY END")
-						w = open(str(serial)+"_bin_"+start_address+"_"+args.cmtfile,'wb')
+						w = open(args.cmtfile+"_"+str(serial)+"_"+start_address+".cmt",'wb')
 						w.write(file[start_fp:end_fp])
 						w.close()
 						serial = serial + 1
