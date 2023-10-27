@@ -36,7 +36,6 @@ if os.path.isfile(args.cmtfile):
 		b = file[fp]
 		if b == BAS_MARKER :
 			start_fp = fp
-#			print("start fp :",start_fp)
 			fp = fp + 10
 			name = [0] * 6
 			for j in range(6) :
@@ -50,8 +49,6 @@ if os.path.isfile(args.cmtfile):
 				else :
 					fp = fp + 1
 			fp = fp + 13
-#			print("end fp :",end_fp)
-#			print("BASIC  END")
 			w = open(args.cmtfile+"_"+str(serial)+".cmt",'wb')
 			w.write(file[start_fp:fp])
 			w.close()
@@ -60,7 +57,6 @@ if os.path.isfile(args.cmtfile):
 		elif b == BIN_MARKER :
 			start_fp = fp
 			start_address = hex(file[fp+1]*256+file[fp+2]) 
-#			print("start fp :",start_fp)
 			print("BINARY",start_address)
 			fp = fp + 4 # 次のマーカーまで進める
 			while True :
@@ -69,11 +65,8 @@ if os.path.isfile(args.cmtfile):
 					blocksize = file[fp]
 					fp = fp + 2 # check sum
 					if blocksize == 0 :
-						end_fp = fp # fp-1
-#						print("end fp :",end_fp)
-#						print("BINARY END")
 						w = open(args.cmtfile+"_"+str(serial)+"_"+start_address+".cmt",'wb')
-						w.write(file[start_fp:end_fp])
+						w.write(file[start_fp:fp])
 						w.close()
 						serial = serial + 1
 						break
