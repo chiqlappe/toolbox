@@ -69,7 +69,7 @@ if os.path.isfile(args.cmtfile):
 					blocksize = file[fp]
 					fp = fp + 2 # check sum
 					if blocksize == 0 :
-						end_fp = fp-1
+						end_fp = fp # fp-1
 #						print("end fp :",end_fp)
 #						print("BINARY END")
 						w = open(args.cmtfile+"_"+str(serial)+"_"+start_address+".cmt",'wb')
